@@ -12,9 +12,10 @@ import FormHelperText from '@mui/material/FormHelperText';
 import FormControl from '@mui/material/FormControl';
 import CanvasJSReact from './canvasjs.react';
 import './App.css';
+// import CanvasJS from 'canvasjs';
 
-// var CanvasJS = CanvasJSReact.CanvasJS;
-var CanvasJSChart = CanvasJSReact.CanvasJSChart;
+// const CanvasJS = CanvasJSReact.CanvasJS;
+const CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 const spanStyle = {
   position: 'absolute',
@@ -61,6 +62,12 @@ function App() {
     var dataPoints = [];
 
     let startTime = new Date();
+
+    // Clear data if already exists
+    // if (chartRef.current) {
+    //   chartRef.current.set("data", null);
+    //   chartRef.current.render();
+    // }
 
     for (var i = 0; i < limit; i += 1) {
       y += Math.round(Math.random() * 10 - 5);
@@ -115,9 +122,9 @@ function App() {
               <MenuItem value={500_000}>500,000 Records</MenuItem>
               <MenuItem value={1_000_000}>1,000,000 Records</MenuItem>
             </Select>
-            <FormHelperText>Select/Change amount of records to render</FormHelperText>
+            <FormHelperText>Select/Change records to render</FormHelperText>
           </FormControl>
-          <CanvasJSChart options={options} ref={chartRef} />
+          <CanvasJSChart options={options} onRef={ref => chartRef.current = ref} />
           {/*You can get reference to the chart instance as shown above using onRef. This allows you to access all chart properties and methods*/}
           <span style={spanStyle}>{timeToRender + " ms"}</span>
         </Paper>
